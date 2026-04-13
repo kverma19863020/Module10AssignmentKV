@@ -28,6 +28,8 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://kvuser:kvpassword@localhost:5432/kvdb_test
+      PYTHONPATH: .
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout Code
@@ -43,6 +45,13 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
+
+      - name: Wait for PostgreSQL
+        run: |
+          until pg_isready -h localhost -p 5432; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
 
       - name: Run Tests with Coverage
         run: |
