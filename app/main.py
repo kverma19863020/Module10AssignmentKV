@@ -8,7 +8,7 @@ from app.models import User
 from app.schemas import UserCreate, UserRead, UserUpdate
 from app import crud
 
-Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="Module10AssignmentKV - Secure User API",

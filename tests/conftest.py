@@ -4,7 +4,13 @@ from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 
 from app.database import Base, get_db
+import pytest
+from fastapi.testclient import TestClient
 from app.main import app
+
+@pytest.fixture
+def client():
+    return TestClient(app)
 
 TEST_DATABASE_URL = "postgresql://kvuser:kvpassword@db:5432/kvdb_test"
 
