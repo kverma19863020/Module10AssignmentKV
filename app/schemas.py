@@ -1,10 +1,14 @@
 import uuid
 from datetime import datetime
 from typing import Optional
+
 from pydantic import BaseModel, EmailStr, field_validator, ConfigDict
 import re
 
 
+# -------------------------
+# USER CREATE
+# -------------------------
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
@@ -17,7 +21,7 @@ class UserCreate(BaseModel):
     def username_alphanumeric(cls, v: str) -> str:
         if not re.match(r"^[a-zA-Z0-9_]{3,50}$", v):
             raise ValueError(
-                "Username must be 3-50 characters: letters, digits, or underscores only."
+                "Username must be 3-50 characters: letters, digits, underscores only."
             )
         return v
 
@@ -33,18 +37,24 @@ class UserCreate(BaseModel):
         return v
 
 
+# -------------------------
+# USER READ (IMPORTANT: includes id)
+# -------------------------
 class UserRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: uuid.UUID
     username: str
     email: EmailStr
-    full_name: Optional[str]
+    full_name: Optional[str] = None
     is_active: bool
     is_admin: bool
     created_at: datetime
 
 
+# -------------------------
+# USER UPDATE
+# -------------------------
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     is_active: Optional[bool] = None
