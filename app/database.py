@@ -4,7 +4,7 @@ import os
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://kvuser:kvpassword@localhost:5432/kvdb_test"
+    "postgresql://kvuser:kvpassword@localhost:5434/kvdb"
 )
 
 engine = create_engine(DATABASE_URL)

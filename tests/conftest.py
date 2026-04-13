@@ -12,7 +12,8 @@ from app.main import app
 def client():
     return TestClient(app)
 
-TEST_DATABASE_URL = "postgresql://kvuser:kvpassword@localhost:5432/kvdb_test"
+
+TEST_DATABASE_URL = "postgresql://kvuser:kvpassword@localhost:5434/kvdb"
 
 engine_test = create_engine(TEST_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine_test)
