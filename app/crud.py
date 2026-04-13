@@ -4,6 +4,7 @@ from app.schemas import UserCreate, UserUpdate
 from typing import Optional, List
 import uuid
 
+#Crud file
 
 def create_user(db: Session, user_in: UserCreate) -> User:
     hashed_pw = User.hash_password(user_in.password)
