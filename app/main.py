@@ -15,7 +15,7 @@ async def lifespan(app: FastAPI):
     # create tables on startup (works in CI + Docker)
     import os
     if os.getenv("TESTING") != "true":
-    Base.metadata.create_all(bind=engine)
+        Base.metadata.create_all(bind=engine)
     yield
     # optional cleanup after shutdown
 
